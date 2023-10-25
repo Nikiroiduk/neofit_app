@@ -34,6 +34,30 @@ class SettingsScreen extends StatelessWidget {
               onTap: () => context.push(Screens.accountSettings.path),
               title: const Text('Account'),
             ),
+            ListTile(
+              onTap: () => context.push(Screens.notificationsSettings.path),
+              title: const Text('Notifications'),
+            ),
+            ListTile(
+              onTap: () => context.push(Screens.languageSettings.path),
+              title: const Text('Language'),
+            ),
+            ListTile(
+              onTap: () => context.push(Screens.unitsSettings.path),
+              title: const Text('Units'),
+            ),
+            ListTile(
+              onTap: () => context.push(Screens.themeSettings.path),
+              title: const Text('Theme'),
+            ),
+            ListTile(
+              onTap: () => context.push(Screens.importExportDataSettings.path),
+              title: const Text('Import & Export data'),
+            ),
+            ListTile(
+              onTap: () => context.push(Screens.workoutsSettings.path),
+              title: const Text('Workouts'),
+            ),
           ],
         ),
       ),
