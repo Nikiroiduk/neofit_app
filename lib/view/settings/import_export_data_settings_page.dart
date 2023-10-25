@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class ProfileSettingsPage extends StatelessWidget {
-  const ProfileSettingsPage({super.key});
+class ImportExportDataSettingsPage extends StatelessWidget {
+  const ImportExportDataSettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +13,10 @@ class ProfileSettingsPage extends StatelessWidget {
               onPressed: () => context.pop(),
               icon: const Icon(Icons.arrow_back_rounded))
         ],
-        title: const Text('Profile'),
+        title: const Text('Import & Export data'),
       ),
       body: const Center(
-        child: Text('Profile settings'),
+        child: Text('Import Export data settings'),
       ),
     );
   }

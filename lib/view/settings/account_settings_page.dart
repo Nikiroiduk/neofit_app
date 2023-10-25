@@ -24,6 +24,14 @@ class AccountSettingsPage extends StatelessWidget {
               onTap: () => context.push(Screens.accountSettingsUsername.path),
               title: const Text('Username'),
             ),
+            ListTile(
+              onTap: () => context.push(Screens.accountSettingsPassword.path),
+              title: const Text('Password'),
+            ),
+            ListTile(
+              onTap: () => context.push(Screens.accountSettingsEmail.path),
+              title: const Text('Email'),
+            ),
           ],
         ),
       ),

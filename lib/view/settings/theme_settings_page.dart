@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class ProfileSettingsPage extends StatelessWidget {
-  const ProfileSettingsPage({super.key});
+class ThemeSettingsPage extends StatelessWidget {
+  const ThemeSettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +13,10 @@ class ProfileSettingsPage extends StatelessWidget {
               onPressed: () => context.pop(),
               icon: const Icon(Icons.arrow_back_rounded))
         ],
-        title: const Text('Profile'),
+        title: const Text('Theme'),
       ),
       body: const Center(
-        child: Text('Profile settings'),
+        child: Text('Theme settings'),
       ),
     );
   }
