@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/router/utils.dart';
-import 'package:neofit_app/view/router_transition_factory.dart';
+// import 'package:neofit_app/view/router_transition_factory.dart';
 import '../view/view.dart';
 
 final _key0 = GlobalKey<NavigatorState>();
@@ -10,6 +10,7 @@ final _key1 = GlobalKey<NavigatorState>();
 
 final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
+    debugLogDiagnostics: true,
     navigatorKey: _key0,
     initialLocation: Screens.feed.path,
     routes: [
@@ -32,8 +33,48 @@ final goRouterProvider = Provider<GoRouter>((ref) {
               path: Screens.profile.path,
               pageBuilder: (context, state) =>
                   const NoTransitionPage(child: ProfilePage()),
-              routes: [],
             ),
+          ]),
+      GoRoute(
+          path: Screens.followersFollowingProfile.path,
+          builder: (context, state) => const FollowersFollowingProfilePage()),
+      GoRoute(
+          path: Screens.historyProfile.path,
+          builder: (context, state) => const HistoryProfilePage()),
+      GoRoute(
+          path: Screens.statistics.path,
+          builder: (context, state) => const StatisticsScreen(),
+          routes: [
+            GoRoute(
+                path: Screens.measuresStatistics.nestedPath,
+                builder: (context, state) => const MeasuresStatisticsPage(),
+                routes: [
+                  GoRoute(
+                      path: Screens.bodyFatMeasure.nestedPath,
+                      builder: (context, state) => const BodyFatMeasurePage()),
+                  GoRoute(
+                      path: Screens.chestMeasure.nestedPath,
+                      builder: (context, state) => const ChestMeasurePage()),
+                  GoRoute(
+                      path: Screens.heightMeasure.nestedPath,
+                      builder: (context, state) => const HeightMeasurePage()),
+                  GoRoute(
+                      path: Screens.neckMeasure.nestedPath,
+                      builder: (context, state) => const NeckMeasurePage()),
+                  GoRoute(
+                      path: Screens.shoulderMeasure.nestedPath,
+                      builder: (context, state) => const ShoulderMeasurePage()),
+                  GoRoute(
+                      path: Screens.waistMeasure.nestedPath,
+                      builder: (context, state) => const WaistMeasurePage()),
+                  GoRoute(
+                      path: Screens.weightMeasure.nestedPath,
+                      builder: (context, state) => const WeightMeasurePage()),
+                ]),
+            GoRoute(
+                path: Screens.muscleDistributionStatistics.nestedPath,
+                builder: (context, state) =>
+                    const MuscleDistributionStatisticsPage())
           ]),
       GoRoute(
         path: Screens.settings.path,
