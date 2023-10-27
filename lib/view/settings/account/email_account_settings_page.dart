@@ -8,11 +8,6 @@ class EmailAccountSettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () => context.pop(),
-              icon: const Icon(Icons.arrow_back_rounded))
-        ],
         title: const Text('Email'),
       ),
       body: const Center(

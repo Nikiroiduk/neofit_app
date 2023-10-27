@@ -4,11 +4,12 @@ import 'package:go_router/go_router.dart';
 enum Transitions { fade, rotation, size, scale, slide }
 
 class RouterTransitionFactory {
-  static CustomTransitionPage getTransitionPage(
-      {required BuildContext context,
-      required GoRouterState state,
-      required Widget child,
-      required Transitions type}) {
+  static CustomTransitionPage getTransitionPage({
+    required BuildContext context,
+    required GoRouterState state,
+    required Widget child,
+    required Transitions type,
+  }) {
     return CustomTransitionPage(
         key: state.pageKey,
         child: child,

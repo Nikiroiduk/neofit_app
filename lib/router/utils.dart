@@ -2,6 +2,8 @@ enum Screens {
   feed,
   workout,
   profile,
+  signIn,
+  signUp,
   settings,
   profileSettings,
   importExportDataSettings,
@@ -31,6 +33,10 @@ enum Screens {
 extension ScreensX on Screens {
   String get path {
     switch (this) {
+      case Screens.signIn:
+        return '/signin';
+      case Screens.signUp:
+        return '/signup';
       case Screens.feed:
         return '/feed';
       case Screens.workout:

@@ -1,5 +1,7 @@
 export 'dashboard_screen/dashboard.dart';
 
+export 'auth/auth.dart';
+
 export 'profile/profile.dart';
 
 export 'settings/account/account.dart';

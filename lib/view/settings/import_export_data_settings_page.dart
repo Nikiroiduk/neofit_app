@@ -8,11 +8,6 @@ class ImportExportDataSettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () => context.pop(),
-              icon: const Icon(Icons.arrow_back_rounded))
-        ],
         title: const Text('Import & Export data'),
       ),
       body: const Center(

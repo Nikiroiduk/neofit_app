@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:neofit_app/router/router_notifier.dart';
 import 'package:neofit_app/router/utils.dart';
 // import 'package:neofit_app/view/router_transition_factory.dart';
 import '../view/view.dart';
 
-final _key0 = GlobalKey<NavigatorState>();
-final _key1 = GlobalKey<NavigatorState>();
+final rootNavKey = GlobalKey<NavigatorState>();
+final _key1 = GlobalKey<NavigatorState>(); // TODO: rename
 
 final goRouterProvider = Provider<GoRouter>((ref) {
+  final meh = RouterNotifier(ref);
+
   return GoRouter(
     debugLogDiagnostics: true,
-    navigatorKey: _key0,
-    initialLocation: Screens.feed.path,
+    navigatorKey: rootNavKey,
+    initialLocation: Screens.signIn.path,
+    refreshListenable: meh,
+    redirect: (context, state) => meh.routeRedirect(state),
     routes: [
       ShellRoute(
           navigatorKey: _key1,
@@ -35,6 +40,12 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                   const NoTransitionPage(child: ProfilePage()),
             ),
           ]),
+      GoRoute(
+          path: Screens.signIn.path,
+          builder: (context, state) => const SignInScreen()),
+      GoRoute(
+          path: Screens.signUp.path,
+          builder: (context, state) => const SignUpScreen()),
       GoRoute(
           path: Screens.followersFollowingProfile.path,
           builder: (context, state) => const FollowersFollowingProfilePage()),

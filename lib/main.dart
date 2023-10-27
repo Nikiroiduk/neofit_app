@@ -17,6 +17,8 @@ class MainApp extends StatelessWidget {
     return Consumer(
         builder: (widget, ref, child) => MaterialApp.router(
               routerConfig: ref.watch(goRouterProvider),
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(useMaterial3: true),
             ));
   }
 }

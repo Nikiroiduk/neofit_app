@@ -7,11 +7,9 @@ class UsernameAccountSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(actions: [
-        IconButton(
-            onPressed: () => context.pop(),
-            icon: const Icon(Icons.arrow_back_rounded))
-      ], title: const Text('Username'),),
+      appBar: AppBar(
+        title: const Text('Username'),
+      ),
       body: const Center(
         child: Text('Username settings'),
       ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:neofit_app/auth/auth.dart';
 
 import '../router/router.dart';
 
@@ -30,6 +32,18 @@ class ProfilePage extends StatelessWidget {
               onPressed: () =>
                   context.go(Screens.followersFollowingProfile.path),
               child: const Text('Following')),
+          Consumer(
+            builder: (BuildContext context, WidgetRef ref, Widget? child) {
+              var isBtnActive =
+                  ref.watch(authControllerProvider) is! AuthStateLoading;
+              return TextButton(
+                onPressed: isBtnActive
+                    ? () => ref.read(authControllerProvider.notifier).logout()
+                    : null,
+                child: const Text('Sign Out'),
+              );
+            },
+          ),
         ]);
   }
 }
