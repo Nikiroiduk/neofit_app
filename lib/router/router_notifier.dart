@@ -24,7 +24,7 @@ class RouterNotifier extends ChangeNotifier {
 
     if (authState is AuthStateSignedUp &&
         state.matchedLocation == Screens.signUp.path) {
-      return Screens.feed.path; // TODO: Change to onboarding page
+      return Screens.onboarding.path;
     }
 
     if (authState is AuthStateLoggedOut &&

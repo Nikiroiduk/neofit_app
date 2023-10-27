@@ -4,6 +4,7 @@ enum Screens {
   profile,
   signIn,
   signUp,
+  onboarding,
   settings,
   profileSettings,
   importExportDataSettings,
@@ -37,6 +38,8 @@ extension ScreensX on Screens {
         return '/signin';
       case Screens.signUp:
         return '/signup';
+      case Screens.onboarding:
+        return '/onboarding';
       case Screens.feed:
         return '/feed';
       case Screens.workout:
