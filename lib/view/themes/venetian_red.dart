@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class RedTheme {
+class VenetianRed {
   static const lightColorScheme = ColorScheme(
     brightness: Brightness.light,
     primary: Color(0xFFBE0D14),

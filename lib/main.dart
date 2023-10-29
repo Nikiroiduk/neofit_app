@@ -22,8 +22,16 @@ class MainApp extends StatelessWidget {
         builder: (widget, ref, child) => MaterialApp.router(
               routerConfig: ref.watch(goRouterProvider),
               debugShowCheckedModeBanner: false,
-              theme: ref.watch(theme),
-              darkTheme: ref.watch(darkTheme),
+              theme: ThemeData(
+                useMaterial3: true,
+                colorScheme: ref.watch(selectedColorNotifier).colorScheme,
+                brightness: Brightness.light,
+              ),
+              darkTheme: ThemeData(
+                useMaterial3: true,
+                colorScheme: ref.watch(selectedColorNotifier).colorSchemeDark,
+                brightness: Brightness.dark,
+              ),
               themeMode: ref.watch(themeMode),
             ));
   }

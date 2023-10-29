@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:neofit_app/assets/images/onboarding_images.dart';
+import 'package:neofit_app/view/onboarding/onboarding_images.dart';
 import 'package:neofit_app/router/utils.dart';
+// import 'package:neofit_app/view/themes/themes.dart';
 
 // TODO: Save state (completed or not)
 
@@ -12,48 +13,44 @@ const int animationDurationMilliseconds = 500;
 
 final pageProvider = StateProvider<int>((ref) => initialPage);
 
+class OnboardingPage {
+  OnboardingPage(
+      {required this.onboardingPageImage, required this.onboardingPageText});
+  final String onboardingPageImage;
+  final String onboardingPageText;
+}
+
 class OnboardingScreen extends StatelessWidget {
   OnboardingScreen({super.key});
 
   final PageController _pageController =
       PageController(initialPage: initialPage);
 
-  final List<Widget> _pages = [
-    Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgPicture.string(
-          OnboardingImages.gymExercises,
-        ),
-        const Text('Some text on onboarding page'),
-      ],
-    ),
-    Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgPicture.string(
-          OnboardingImages.visualData,
-        ),
-        const Text('Some text on onboarding page'),
-      ],
-    ),
-    Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgPicture.string(
-          OnboardingImages.shareWithFriends,
-        ),
-        const Text('Some text on onboarding page'),
-      ],
-    )
-  ];
-
   @override
   Widget build(BuildContext context) {
+    var currentScheme = Theme.of(context).colorScheme;
+    debugPrint('\t!!! pages list created\t!!!');
+    final List<OnboardingPage> pages = [
+      OnboardingPage(
+          onboardingPageImage: OnboardingImages.gymExercises(currentScheme),
+          onboardingPageText: 'some text'),
+      OnboardingPage(
+          onboardingPageImage: OnboardingImages.visualData(currentScheme),
+          onboardingPageText: 'some text'),
+      OnboardingPage(
+          onboardingPageImage: OnboardingImages.shareWithFriends(currentScheme),
+          onboardingPageText: 'some text'),
+    ];
     return Scaffold(
       body: PageView.builder(
           itemBuilder: (context, index) {
-            return _pages[index];
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.string(pages[index].onboardingPageImage),
+                Text(pages[index].onboardingPageText),
+              ],
+            );
           },
           controller: _pageController),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -76,8 +73,11 @@ class OnboardingScreen extends StatelessWidget {
                                         animationDurationMilliseconds),
                                 curve: Curves.ease);
                           }
-                        : () => context.go(Screens.feed.path),
-                    child: tmp > 0 ? const Text('prev') : const Text('skip'),
+                        : () {
+                            ref.read(pageProvider.notifier).state = initialPage;
+                            context.go(Screens.feed.path);
+                          },
+                    child: tmp > 0 ? const Text('Prev') : const Text('Skip'),
                   );
                 },
               )),
@@ -88,7 +88,7 @@ class OnboardingScreen extends StatelessWidget {
               builder: (BuildContext context, WidgetRef ref, Widget? child) {
                 var tmp = ref.watch(pageProvider);
                 return TextButton(
-                  onPressed: tmp < _pages.length - 1
+                  onPressed: tmp < pages.length - 1
                       ? () {
                           ref.read(pageProvider.notifier).state++;
                           _pageController.nextPage(
@@ -96,10 +96,13 @@ class OnboardingScreen extends StatelessWidget {
                                   milliseconds: animationDurationMilliseconds),
                               curve: Curves.ease);
                         }
-                      : () => context.go(Screens.feed.path),
-                  child: tmp < _pages.length - 1
-                      ? const Text('next')
-                      : const Text('done'),
+                      : () {
+                          context.go(Screens.feed.path);
+                          ref.read(pageProvider.notifier).state = initialPage;
+                        },
+                  child: tmp < pages.length - 1
+                      ? const Text('Next')
+                      : const Text('Done'),
                 );
               },
             ),

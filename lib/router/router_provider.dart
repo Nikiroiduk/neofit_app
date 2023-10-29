@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/router/router_notifier.dart';
 import 'package:neofit_app/router/utils.dart';
-import 'package:neofit_app/view/onboarding.dart';
+import 'package:neofit_app/view/onboarding/onboarding.dart';
 // import 'package:neofit_app/view/router_transition_factory.dart';
 import '../view/view.dart';
 

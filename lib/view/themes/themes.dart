@@ -1,89 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/preferences.dart';
-import 'package:neofit_app/view/themes/purple.dart';
-import 'package:neofit_app/view/themes/red.dart';
+import 'package:neofit_app/view/themes/royal_purple.dart';
+import 'package:neofit_app/view/themes/venetian_red.dart';
 
-final theme = Provider((ref) => _theme);
-final darkTheme = Provider((ref) => _darkTheme);
-final test = Provider((ref) => _colorScheme);
+final theme = Provider((ref) => Brightness.light);
+final darkTheme = Provider((ref) => Brightness.dark);
 final themeMode = StateNotifierProvider<ThemeModeNotifier, ThemeMode>(
   (ref) => ThemeModeNotifier(preferences: ref.watch(preferences)),
 );
 
-final _theme = ThemeData(
-  useMaterial3: true,
-  colorScheme: _colorScheme.colorScheme,
-);
-
-final _darkTheme = ThemeData(
-  useMaterial3: true,
-  colorScheme: _colorScheme.colorSchemeDark,
-);
-
-enum Theme {
-  purple,
-  red,
+enum ColorSchemeEnum {
+  royalPurple,
+  venetianRed,
 }
 
-extension ThemeX on Theme {
+extension ColorSchemeEnumX on ColorSchemeEnum {
   ColorScheme get colorScheme {
     switch (this) {
-      case Theme.purple:
-        return PurpleTheme.lightColorScheme;
-      case Theme.red:
-        return RedTheme.lightColorScheme;
+      case ColorSchemeEnum.royalPurple:
+        return RoyalPurple.lightColorScheme;
+      case ColorSchemeEnum.venetianRed:
+        return VenetianRed.lightColorScheme;
     }
   }
 
   ColorScheme get colorSchemeDark {
     switch (this) {
-      case Theme.purple:
-        return PurpleTheme.darkColorScheme;
-      case Theme.red:
-        return RedTheme.darkColorScheme;
+      case ColorSchemeEnum.royalPurple:
+        return RoyalPurple.darkColorScheme;
+      case ColorSchemeEnum.venetianRed:
+        return VenetianRed.darkColorScheme;
     }
   }
 }
-
-final _colorScheme = Theme.purple;
-// final _customTheme = CustomThemeData(
-//   imageSize: 150,
-// );
-
-// final _customDarkTheme = CustomThemeData();
-
-// // EXTENSIONS AND CLASSES
-// extension CustomTheme on ThemeData {
-//   AssetImage imageForName(String name) {
-//     final path = brightness == Brightness.dark ? 'assets/dark' : 'assets/';
-//     return AssetImage('$path/$name');
-//   }
-
-//   CustomThemeData get custom =>
-//       brightness == Brightness.dark ? _customDarkTheme : _customTheme;
-// }
-
-// class CustomThemeData {
-//   final double imageSize;
-
-//   CustomThemeData({
-//     this.imageSize = 100,
-//   });
-// }
 
 class ThemeModeNotifier extends StateNotifier<ThemeMode> {
   final Preferences preferences;
 
   ThemeModeNotifier({required this.preferences}) : super(preferences.themeMode);
+  void setTheme(ThemeMode mode) {
+    if (state == mode) return;
+    state = mode;
+    preferences.persistThemeMode(mode);
+  }
+}
 
-  void toggle() {
-    if (state == ThemeMode.dark) {
-      preferences.persistThemeMode(ThemeMode.light);
-      state = ThemeMode.light;
-    } else {
-      preferences.persistThemeMode(ThemeMode.dark);
-      state = ThemeMode.dark;
-    }
+// TODO: save colorScheme
+final selectedColorScheme =
+    StateProvider<ColorSchemeEnum>((ref) => ColorSchemeEnum.royalPurple);
+final selectedColorNotifier =
+    StateNotifierProvider<SelectedColorNotifier, ColorSchemeEnum>(
+        (ref) => SelectedColorNotifier(preferences: ref.watch(preferences)));
+
+class SelectedColorNotifier extends StateNotifier<ColorSchemeEnum> {
+  final Preferences preferences;
+
+  SelectedColorNotifier({required this.preferences})
+      : super(preferences.colorScheme);
+  void red() {
+    state = ColorSchemeEnum.venetianRed;
+    preferences.persistColorScheme(ColorSchemeEnum.venetianRed);
+  }
+
+  void purple() {
+    state = ColorSchemeEnum.royalPurple;
+    preferences.persistColorScheme(ColorSchemeEnum.royalPurple);
   }
 }
