@@ -6,7 +6,7 @@ import 'package:neofit_app/view/onboarding/onboarding_images.dart';
 import 'package:neofit_app/router/utils.dart';
 // import 'package:neofit_app/view/themes/themes.dart';
 
-// TODO: Save state (completed or not)
+// TODO: swipe geasture
 
 const int initialPage = 0;
 const int animationDurationMilliseconds = 500;
@@ -47,7 +47,50 @@ class OnboardingScreen extends StatelessWidget {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.string(pages[index].onboardingPageImage),
+                // SvgPicture.string(
+                //   pages[index].onboardingPageImage,
+                //   colorFilter: ColorFilter.matrix(<double>[
+                //     (currentScheme.primary.red / 255),
+                //     (currentScheme.primary.green / 255),
+                //     (currentScheme.primary.blue / 255),
+                //     0,
+                //     0,
+                //     0,
+                //     0,
+                //     0,
+                //     0,
+                //     0,
+                //     0,
+                //     0,
+                //     0,
+                //     0,
+                //     0,
+                //     0,
+                //     0,
+                //     0,
+                //     1,
+                //     0,
+                //   ]),
+                // ),
+                // Image.asset(
+                //   'assets/images/Group8.png',
+                //   colorBlendMode: BlendMode.modulate,
+                //   color: currentScheme.primary,
+                // ),
+                // ColorFiltered(
+                //   colorFilter:
+                //       ColorFilter.mode(currentScheme.primary, BlendMode.color),
+                //   child: Image.asset(
+                //     'assets/images/Group8.png',
+                //     // colorBlendMode: BlendMode.color,
+                //     // color: currentScheme.background
+                //     //     .harmonizeWith(currentScheme.primary),
+                //   ),
+                // ),
+
+                SvgPicture.string(
+                  pages[index].onboardingPageImage,
+                ),
                 Text(pages[index].onboardingPageText),
               ],
             );

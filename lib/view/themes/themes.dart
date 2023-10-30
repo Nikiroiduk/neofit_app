@@ -4,8 +4,6 @@ import 'package:neofit_app/preferences.dart';
 import 'package:neofit_app/view/themes/royal_purple.dart';
 import 'package:neofit_app/view/themes/venetian_red.dart';
 
-final theme = Provider((ref) => Brightness.light);
-final darkTheme = Provider((ref) => Brightness.dark);
 final themeMode = StateNotifierProvider<ThemeModeNotifier, ThemeMode>(
   (ref) => ThemeModeNotifier(preferences: ref.watch(preferences)),
 );
@@ -46,7 +44,6 @@ class ThemeModeNotifier extends StateNotifier<ThemeMode> {
   }
 }
 
-// TODO: save colorScheme
 final selectedColorScheme =
     StateProvider<ColorSchemeEnum>((ref) => ColorSchemeEnum.royalPurple);
 final selectedColorNotifier =

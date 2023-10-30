@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:neofit_app/router/router.dart';
 
 class FeedPage extends StatelessWidget {
   const FeedPage({super.key});
