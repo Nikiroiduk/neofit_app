@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/global_provider.dart';
@@ -8,7 +10,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // TODO: fix onboarding images
-// TODO: Localization
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,6 +54,7 @@ class MainApp extends StatelessWidget {
                 brightness: Brightness.dark,
               ),
               themeMode: ref.watch(themeMode),
+              scrollBehavior: MyCustomScrollBehavior(),
             ));
   }
 }

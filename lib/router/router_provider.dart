@@ -4,11 +4,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/router/router_notifier.dart';
 import 'package:neofit_app/router/utils.dart';
 import 'package:neofit_app/view/onboarding/onboarding.dart';
+import 'package:neofit_app/view/personal_information.dart';
 // import 'package:neofit_app/view/router_transition_factory.dart';
 import '../view/view.dart';
 
 final rootNavKey = GlobalKey<NavigatorState>();
-final _key1 = GlobalKey<NavigatorState>(); // TODO: rename
+final dashboardNavKey = GlobalKey<NavigatorState>();
 
 final goRouterProvider = Provider<GoRouter>((ref) {
   final meh = RouterNotifier(ref);
@@ -21,7 +22,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     redirect: (context, state) => meh.routeRedirect(state),
     routes: [
       ShellRoute(
-          navigatorKey: _key1,
+          navigatorKey: dashboardNavKey,
           builder: (context, state, child) =>
               DashboardScreen(key: state.pageKey, child: child),
           routes: [
@@ -50,6 +51,9 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
           path: Screens.onboarding.path,
           builder: (context, state) => OnboardingScreen()),
+      GoRoute(
+          path: Screens.personalInformation.path,
+          builder: (context, state) => const PersonalInformation()),
       GoRoute(
           path: Screens.followersFollowingProfile.path,
           builder: (context, state) => const FollowersFollowingProfilePage()),

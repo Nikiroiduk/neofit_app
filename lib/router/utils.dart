@@ -28,7 +28,8 @@ enum Screens {
   weightMeasure,
   muscleDistributionStatistics,
   followersFollowingProfile,
-  historyProfile
+  historyProfile,
+  personalInformation
 }
 
 extension ScreensX on Screens {
@@ -94,6 +95,8 @@ extension ScreensX on Screens {
         return '/followersFollowing';
       case Screens.historyProfile:
         return '/history';
+      case Screens.personalInformation:
+        return '/personalInformation';
       default:
         return '/';
     }
