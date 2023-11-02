@@ -8,10 +8,7 @@ final themeMode = StateNotifierProvider<ThemeModeNotifier, ThemeMode>(
   (ref) => ThemeModeNotifier(preferences: ref.watch(preferences)),
 );
 
-enum ColorSchemeEnum {
-  royalPurple,
-  venetianRed,
-}
+enum ColorSchemeEnum { royalPurple, venetianRed, system }
 
 extension ColorSchemeEnumX on ColorSchemeEnum {
   ColorScheme get colorScheme {
@@ -20,6 +17,8 @@ extension ColorSchemeEnumX on ColorSchemeEnum {
         return RoyalPurple.lightColorScheme;
       case ColorSchemeEnum.venetianRed:
         return VenetianRed.lightColorScheme;
+      default:
+        return RoyalPurple.lightColorScheme;
     }
   }
 
@@ -29,6 +28,8 @@ extension ColorSchemeEnumX on ColorSchemeEnum {
         return RoyalPurple.darkColorScheme;
       case ColorSchemeEnum.venetianRed:
         return VenetianRed.darkColorScheme;
+      default:
+        return RoyalPurple.darkColorScheme;
     }
   }
 }
@@ -63,5 +64,10 @@ class SelectedColorNotifier extends StateNotifier<ColorSchemeEnum> {
   void purple() {
     state = ColorSchemeEnum.royalPurple;
     preferences.persistColorScheme(ColorSchemeEnum.royalPurple);
+  }
+
+  void system() {
+    state = ColorSchemeEnum.system;
+    preferences.persistColorScheme(ColorSchemeEnum.system);
   }
 }

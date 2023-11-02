@@ -30,6 +30,9 @@ class ThemeSettingsPage extends StatelessWidget {
                           .read(themeMode.notifier)
                           .setTheme(ThemeMode.system),
                       child: const Text('System theme')),
+                  const SizedBox(
+                    height: 50,
+                  ),
                   TextButton(
                       onPressed: () =>
                           ref.read(selectedColorNotifier.notifier).red(),
@@ -38,6 +41,10 @@ class ThemeSettingsPage extends StatelessWidget {
                       onPressed: () =>
                           ref.read(selectedColorNotifier.notifier).purple(),
                       child: const Text('Royal Purple')),
+                  TextButton(
+                      onPressed: () =>
+                          ref.read(selectedColorNotifier.notifier).system(),
+                      child: const Text('System scheme')),
                 ],
               );
             },
