@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/router/utils.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../dashboard_screen/dashboard.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -40,7 +40,7 @@ class SettingsScreen extends StatelessWidget {
             ),
             ListTile(
               onTap: () => context.push(Screens.languageSettings.path),
-              title: const Text('Language'),
+              title: Text(AppLocalizations.of(context).settingsLanguage),
             ),
             ListTile(
               onTap: () => context.push(Screens.unitsSettings.path),

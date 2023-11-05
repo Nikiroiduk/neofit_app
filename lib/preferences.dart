@@ -19,6 +19,9 @@ class Preferences {
   persistColorScheme(ColorSchemeEnum colorScheme) =>
       sharedPreferences.setString('colorScheme', colorScheme.toString());
 
+  persistLocale(Locale locale) =>
+      sharedPreferences.setString('locale', locale.languageCode);
+
   ThemeMode get themeMode => ThemeMode.values.firstWhere(
         (element) =>
             element.toString() == sharedPreferences.getString('themeMode'),
@@ -29,4 +32,7 @@ class Preferences {
       (element) =>
           element.toString() == sharedPreferences.getString('colorScheme'),
       orElse: () => ColorSchemeEnum.royalPurple);
+
+  Locale get locale =>
+      Locale(sharedPreferences.getString('locale') ?? 'en', '');
 }

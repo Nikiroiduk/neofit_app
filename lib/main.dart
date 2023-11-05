@@ -4,13 +4,14 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/global_provider.dart';
+import 'package:neofit_app/locale/locale_provider.dart';
 import 'package:neofit_app/view/themes/themes.dart';
 import 'router/router.dart';
-
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // TODO: fix onboarding images
+// TODO: animate skip/prev and next/done btns on onboarding page
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   @override
@@ -43,7 +44,8 @@ class MainApp extends StatelessWidget {
                     GlobalWidgetsLocalizations.delegate,
                     GlobalCupertinoLocalizations.delegate,
                   ],
-                  supportedLocales: const [Locale('en'), Locale('ru')],
+                  supportedLocales: ref.watch(supportedLocalesProvider),
+                  locale: ref.watch(localeProvider),
                   routerConfig: ref.watch(goRouterProvider),
                   debugShowCheckedModeBanner: false,
                   theme: ThemeData(

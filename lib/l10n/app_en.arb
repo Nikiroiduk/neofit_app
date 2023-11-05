@@ -1,5 +1,6 @@
 {
     "appTitle" : "Neofit",
     "signIn" : "Sign in",
-    "signUp" : "Sign up"
+    "signUp" : "Sign up",
+    "settingsLanguage": "Language"
 }
