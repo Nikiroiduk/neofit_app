@@ -18,6 +18,11 @@ class LanguageSettingsPage extends StatelessWidget {
             return Column(
               children: [
                 TextButton(
+                    onPressed: () => ref
+                        .read(localeNotifier.notifier)
+                        .auto(ref.watch(platformLocaleProvider)),
+                    child: const Text('Auto')),
+                TextButton(
                     onPressed: () =>
                         ref.read(localeNotifier.notifier).english(),
                     child: const Text('English')),

@@ -1,11 +1,12 @@
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/platform_locale/platform_locale_interface.dart';
 import 'package:neofit_app/preferences.dart';
 
 final platformLocaleProvider =
-    Provider<Locale>((ref) => PlatformLocale().getPlatformLocale());
+    StateProvider<Locale>((ref) => PlatformLocale().getPlatformLocale());
 
 final supportedLocalesProvider = Provider<List<Locale>>((ref) {
   return const [
@@ -24,8 +25,14 @@ class LocaleNotifier extends StateNotifier<Locale> {
 
   LocaleNotifier({required this.preferences}) : super(preferences.locale);
 
+  void auto(Locale locale) {
+    state = locale;
+    preferences.persistLocale(state);
+  }
+
   void russian() {
     state = const Locale('ru', '');
+    debugPrint(state.toString());
     preferences.persistLocale(state);
   }
 

@@ -1,30 +1,31 @@
-import 'dart:io';
 import 'dart:ui';
 
 import 'platform_locale_interface.dart';
 
-class PlatformLocaleMobile implements PlatformLocale {
+class PlatformLocaleWeb implements PlatformLocale {
   @override
   Locale getPlatformLocale() {
-    String _platformLocaleName = Platform.localeName;
-    print("Platform Locale Name (Mobile): " + _platformLocaleName);
+    // Web locale is fucked up
+    // TODO: Web locale
 
-    // Language code only
-    if (_platformLocaleName.length == 2) {
-      return Locale.fromSubtags(languageCode: _platformLocaleName);
-    }
+    // String platformLocaleName = Platform.localeName;
+    // debugPrint("Platform Locale Name (Web): $platformLocaleName");
 
-    // Language and country codes
-    String _languageCode =
-        _platformLocaleName.substring(0, _platformLocaleName.indexOf('_'));
-    String _countryCode =
-        _platformLocaleName.substring(_platformLocaleName.indexOf('_') + 1);
+    // if (platformLocaleName.length == 2) {
+    //   return Locale.fromSubtags(languageCode: platformLocaleName);
+    // }
 
-    return Locale.fromSubtags(
-      languageCode: _languageCode,
-      countryCode: _countryCode,
-    );
+    // String languageCode =
+    //     platformLocaleName.substring(0, platformLocaleName.indexOf('_'));
+    // String countryCode =
+    //     platformLocaleName.substring(platformLocaleName.indexOf('_') + 1);
+
+    // return Locale.fromSubtags(
+    //   languageCode: languageCode,
+    //   countryCode: countryCode,
+    // );
+    return const Locale('en', '');
   }
 }
 
-PlatformLocale getImplementation() => PlatformLocaleMobile();
+PlatformLocale getImplementation() => PlatformLocaleWeb();

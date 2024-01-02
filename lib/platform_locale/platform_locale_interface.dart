@@ -7,6 +7,5 @@ import 'platform_locale_stud.dart'
 abstract class PlatformLocale {
   Locale getPlatformLocale();
 
-  // Return the correct implementation
   factory PlatformLocale() => getImplementation();
 }

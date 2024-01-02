@@ -6,8 +6,6 @@ import 'package:neofit_app/view/onboarding/onboarding_images.dart';
 import 'package:neofit_app/router/utils.dart';
 // import 'package:neofit_app/view/themes/themes.dart';
 
-// TODO: swipe geasture
-
 const int initialPage = 0;
 const int animationDurationMilliseconds = 500;
 
@@ -30,7 +28,7 @@ class OnboardingScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var currentPage = ref.watch(pageProvider);
     var currentScheme = Theme.of(context).colorScheme;
-    debugPrint('\t!!! pages list created\t!!!');
+    debugPrint('\t!!!  pages list created\t!!!');
     final List<OnboardingPage> pages = [
       OnboardingPage(
           onboardingPageImage: OnboardingImages.gymExercises(currentScheme),

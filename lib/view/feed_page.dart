@@ -5,11 +5,11 @@ class FeedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text('Feed'),
+          Text('Feed'),
           // TextButton(
           //     onPressed: () => context.go(Screens.signIn.path),
           //     child: const Text('Sign In screen'))
