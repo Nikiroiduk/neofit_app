@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/router/router_notifier.dart';
 import 'package:neofit_app/router/utils.dart';
+import 'package:neofit_app/view/auth/password_restoration_page.dart';
 import 'package:neofit_app/view/onboarding/onboarding.dart';
 import 'package:neofit_app/view/personal_information.dart';
 // import 'package:neofit_app/view/router_transition_factory.dart';
@@ -44,7 +45,12 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           ]),
       GoRoute(
           path: Screens.signIn.path,
-          builder: (context, state) => const SignInScreen()),
+          builder: (context, state) => const SignInScreen(),
+          routes: [
+            GoRoute(
+                path: Screens.passwordRestoration.nestedPath,
+                builder: (context, state) => const PasswordRestorationPage())
+          ]),
       GoRoute(
           path: Screens.signUp.path,
           builder: (context, state) => const SignUpScreen()),

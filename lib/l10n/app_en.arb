@@ -2,5 +2,9 @@
     "appTitle" : "Neofit",
     "signIn" : "Sign in",
     "signUp" : "Sign up",
-    "settingsLanguage": "Language"
+    "settingsLanguage": "Language",
+    "password": "Password",
+    "forgotPassword": "Forgot password.",
+    "dontHaveAnAccountYet": "Don't have an account yet?",
+    "createOne": "Create one."
 }

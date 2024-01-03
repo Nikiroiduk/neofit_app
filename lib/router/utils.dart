@@ -29,7 +29,8 @@ enum Screens {
   muscleDistributionStatistics,
   followersFollowingProfile,
   historyProfile,
-  personalInformation
+  personalInformation,
+  passwordRestoration
 }
 
 extension ScreensX on Screens {
@@ -39,6 +40,8 @@ extension ScreensX on Screens {
         return '/signin';
       case Screens.signUp:
         return '/signup';
+      case Screens.passwordRestoration:
+        return '/signin/passwordRestoration';
       case Screens.onboarding:
         return '/onboarding';
       case Screens.feed:
@@ -104,6 +107,8 @@ extension ScreensX on Screens {
 
   String get nestedPath {
     switch (this) {
+      case Screens.passwordRestoration:
+        return 'passwordRestoration';
       case Screens.measuresStatistics:
         return 'measures';
       case Screens.bodyFatMeasure:

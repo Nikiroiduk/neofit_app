@@ -2,5 +2,9 @@
     "appTitle" : "Neofit",
     "signIn" : "Войти",
     "signUp" : "Зарегестрироваться",
-    "settingsLanguage": "Язык"
+    "settingsLanguage": "Язык",
+    "password": "Пароль",
+    "forgotPassword": "Забыли пароль?",
+    "dontHaveAnAccountYet": "Все еще нет акаунта?",
+    "createOne": "Создать."
 }

@@ -61,7 +61,7 @@ class AuthController extends StateNotifier<AuthState> {
 
   void login(String email, String password) async {
     state = const AuthStateLoading();
-    debugPrint(state.toString());
+    debugPrint('$state with email: $email and password: $password');
     try {
       await ref.read(authServiceProvider).login(email, password);
       state = const AuthStateSuccess();
