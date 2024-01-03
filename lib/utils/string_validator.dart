@@ -39,6 +39,11 @@ class PasswordRegexValidator extends RegexValidator {
                 r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*();:,."-_/#?&])[A-Za-z\d@$!%*();:,."-_/#?&]{8,}$');
 }
 
+class UsernameRegexValidator extends RegexValidator {
+  UsernameRegexValidator()
+      : super(regexSource: r'^[a-zA-Z_][a-zA-Z0-9_]{3,19}$');
+}
+
 class NonEmptyStringValidator extends StringValidator {
   @override
   bool isValid(String? value) {

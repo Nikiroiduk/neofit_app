@@ -7,5 +7,18 @@
     "password": "Password",
     "forgotPassword": "Forgot password.",
     "dontHaveAnAccountYet": "Don't have an account yet?",
-    "createOne": "Create one."
+    "createOne": "Create one.",
+    "alreadyHaveAnAccount": "Already have an account?",
+    "username": "Username",
+    "email": "Email",
+    "usernameCantBeEmpty": "Username can't be empty",
+    "usernameIsTooShort": "Username is too short",
+    "invalidUsername": "Invalid username",
+    "emailCantBeEmpty": "Email can't be empty",
+    "emailIsTooShort": "Email is too short",
+    "invalidEmail": "Invalid email",
+    "passwordCantBeEmpty": "Password can't be empty",
+    "passwordIsTooShort": "Password is too short",
+    "invalidPassword": "Password must contain at least 1 character and 1 number"
+
 }

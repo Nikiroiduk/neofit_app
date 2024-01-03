@@ -1,5 +1,6 @@
 import 'package:formz/formz.dart';
 import 'package:neofit_app/utils/string_validator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum EmailValidationError {
   empty,
@@ -8,14 +9,14 @@ enum EmailValidationError {
 }
 
 extension EmailValidationErrorX on EmailValidationError {
-  String get message {
+  String message(AppLocalizations loc) {
     switch (this) {
       case EmailValidationError.empty:
-        return "Email can't be empty";
+        return loc.emailCantBeEmpty;
       case EmailValidationError.short:
-        return "Email is too short";
+        return loc.emailIsTooShort;
       case EmailValidationError.invalid:
-        return "Invalid email";
+        return loc.invalidEmail;
     }
   }
 }
@@ -27,7 +28,13 @@ class EmailFormz extends FormzInput<String, EmailValidationError> {
 
   @override
   EmailValidationError? validator(String value) {
-    if (value.length < 4) return EmailValidationError.short;
+    if (!NonEmptyStringValidator().isValid(value)) {
+      return EmailValidationError.empty;
+    }
+
+    if (!MinLengthStringValidator(4).isValid(value)) {
+      return EmailValidationError.short;
+    }
 
     if (!EmailRegexValidator().isValid(value)) {
       return EmailValidationError.invalid;

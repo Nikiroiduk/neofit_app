@@ -2,10 +2,23 @@
     "@@locale": "ru",
     "appTitle" : "Neofit",
     "signIn" : "Войти",
-    "signUp" : "Зарегестрироваться",
+    "signUp" : "Создать аккаунт",
     "settingsLanguage": "Язык",
     "password": "Пароль",
     "forgotPassword": "Забыли пароль?",
-    "dontHaveAnAccountYet": "Все еще нет акаунта?",
-    "createOne": "Создать."
+    "dontHaveAnAccountYet": "Все еще нет аккаунта?",
+    "createOne": "Создать.",
+    "alreadyHaveAnAccount": "Уже есть аккаунт?",
+    "username": "Имя пользователя",
+    "email": "Электронная почта",
+    "usernameCantBeEmpty": "Имя пользователя не может быть пустым",
+    "usernameIsTooShort": "Имя пользователя слишком короткое",
+    "invalidUsername": "Неверное имя пользователя",
+    "emailCantBeEmpty": "Адрес электронной почты не может быть пустым",
+    "emailIsTooShort": "Адрес электронной почты слишком короткий",
+    "invalidEmail": "Неверный адрес электронной почты",
+    "passwordCantBeEmpty": "Пароль не может быть пустым",
+    "passwordIsTooShort": "Пароль слишком короткий",
+    "invalidPassword": "Пароль должен содержать как минимум 1 символ и 1 цифру"
+
 }

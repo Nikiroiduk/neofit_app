@@ -96,11 +96,13 @@ class SignInFormState extends State<SignInForm> {
         TextFormField(
           controller: _emailController,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (value) => _state.email.validator(value ?? '')?.message,
-          decoration: const InputDecoration(
-              label: Text('Email'),
+          validator: (value) => _state.email
+              .validator(value ?? '')
+              ?.message(AppLocalizations.of(context)),
+          decoration: InputDecoration(
+              label: Text(AppLocalizations.of(context).email),
               hintText: 'some@mail.com',
-              border: OutlineInputBorder()),
+              border: const OutlineInputBorder()),
         ),
         SizedBox(
           height: screenHeight * .02,
@@ -108,7 +110,9 @@ class SignInFormState extends State<SignInForm> {
         TextFormField(
           controller: _passwordController,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (value) => _state.password.validator(value ?? '')?.message,
+          validator: (value) => _state.password
+              .validator(value ?? '')
+              ?.message(AppLocalizations.of(context)),
           obscureText: _isHidden,
           decoration: InputDecoration(
               label: Text(AppLocalizations.of(context).password),
