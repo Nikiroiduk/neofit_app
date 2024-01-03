@@ -1,4 +1,5 @@
 {
+    "@@locale": "en",
     "appTitle" : "Neofit",
     "signIn" : "Sign in",
     "signUp" : "Sign up",

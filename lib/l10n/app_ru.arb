@@ -1,4 +1,5 @@
 {
+    "@@locale": "ru",
     "appTitle" : "Neofit",
     "signIn" : "Войти",
     "signUp" : "Зарегестрироваться",
