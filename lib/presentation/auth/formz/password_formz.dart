@@ -1,5 +1,6 @@
 import 'package:formz/formz.dart';
 import 'package:neofit_app/utils/string_validator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum PasswordValidationError {
   empty,
@@ -8,14 +9,14 @@ enum PasswordValidationError {
 }
 
 extension PasswordValidationErrorX on PasswordValidationError {
-  String get message {
+  String message(AppLocalizations loc) {
     switch (this) {
       case PasswordValidationError.empty:
-        return "Password can't be empty";
+        return loc.passwordCantBeEmpty;
       case PasswordValidationError.short:
-        return "Password is too short";
+        return loc.passwordIsTooShort;
       case PasswordValidationError.invalid:
-        return "Password must contain at least 1 character and 1 number";
+        return loc.invalidPassword;
     }
   }
 }

@@ -5,10 +5,10 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/router/router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:neofit_app/view/auth/auth_images.dart';
-import 'package:neofit_app/view/auth/domain/email_formz.dart';
-import 'package:neofit_app/view/auth/domain/password_formz.dart';
-import '../../auth/auth.dart';
+import 'package:neofit_app/presentation/auth/auth_images.dart';
+import 'package:neofit_app/presentation/auth/formz/email_formz.dart';
+import 'package:neofit_app/presentation/auth/formz/password_formz.dart';
+import '../../domain/auth/auth.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -21,7 +21,7 @@ class SignInScreen extends StatelessWidget {
       body: SafeArea(
           minimum: const EdgeInsets.all(8),
           child: Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.fromLTRB(15.0, 30.0, 15.0, 30.0),
             child: Column(
               children: [
                 const Spacer(),
@@ -96,21 +96,27 @@ class SignInFormState extends State<SignInForm> {
         TextFormField(
           controller: _emailController,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (value) => _state.email.validator(value ?? '')?.message,
-          decoration: const InputDecoration(
-              label: Text('Email'),
-              hintText: 'some@mail.com',
-              border: OutlineInputBorder()),
+          validator: (value) => _state.email
+              .validator(value ?? '')
+              ?.message(AppLocalizations.of(context)),
+          decoration: InputDecoration(
+              label: Text(AppLocalizations.of(context).email),
+              hintText: AppLocalizations.of(context).mailHint,
+              border: const OutlineInputBorder()),
         ),
         SizedBox(
           height: screenHeight * .02,
         ),
         TextFormField(
+          maxLength: 30,
           controller: _passwordController,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (value) => _state.password.validator(value ?? '')?.message,
+          validator: (value) => _state.password
+              .validator(value ?? '')
+              ?.message(AppLocalizations.of(context)),
           obscureText: _isHidden,
           decoration: InputDecoration(
+              counterText: '',
               label: Text(AppLocalizations.of(context).password),
               border: const OutlineInputBorder(),
               suffixIcon: IconButton(

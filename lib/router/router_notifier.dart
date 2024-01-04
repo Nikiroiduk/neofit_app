@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:neofit_app/auth/auth.dart';
+import 'package:neofit_app/domain/auth/auth.dart';
 import 'package:neofit_app/router/router.dart';
 
 class RouterNotifier extends ChangeNotifier {

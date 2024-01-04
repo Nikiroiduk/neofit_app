@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:neofit_app/global_provider.dart';
+import 'package:neofit_app/globals/global_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'view/themes/themes.dart';
+import '../presentation/themes/themes.dart';
 
 final preferences = Provider(
     (ref) => Preferences(sharedPreferences: ref.watch(sharedPreferences)));

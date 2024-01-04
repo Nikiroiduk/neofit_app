@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:neofit_app/preferences.dart';
-import 'package:neofit_app/view/themes/royal_purple.dart';
-import 'package:neofit_app/view/themes/venetian_red.dart';
+import 'package:neofit_app/preferences/preferences.dart';
+import 'package:neofit_app/presentation/themes/royal_purple.dart';
+import 'package:neofit_app/presentation/themes/venetian_red.dart';
 
 final themeMode = StateNotifierProvider<ThemeModeNotifier, ThemeMode>(
   (ref) => ThemeModeNotifier(preferences: ref.watch(preferences)),

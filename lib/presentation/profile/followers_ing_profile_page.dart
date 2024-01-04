@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/router/router.dart';
-import 'package:neofit_app/view/dashboard_screen/dashboard.dart';
+import 'package:neofit_app/presentation/dashboard_screen/dashboard.dart';
 
-class HistoryProfilePage extends StatelessWidget {
-  const HistoryProfilePage({super.key});
+class FollowersFollowingProfilePage extends StatelessWidget {
+  const FollowersFollowingProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +20,10 @@ class HistoryProfilePage extends StatelessWidget {
             );
           },
         ),
-        title: const Text('History'),
+        title: const Text('Follower/Following'),
       ),
       body: const Center(
-        child: Text('Workout history'),
+        child: Text('Followers or Following page'),
       ),
     );
   }
