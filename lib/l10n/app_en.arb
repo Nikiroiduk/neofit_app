@@ -19,6 +19,6 @@
     "invalidEmail": "Invalid email",
     "passwordCantBeEmpty": "Password can't be empty",
     "passwordIsTooShort": "Password is too short",
-    "invalidPassword": "Password must contain at least 1 character and 1 number"
-
+    "invalidPassword": "Password must contain at least 1 character and 1 number",
+    "mailHint": "some@mail.com"
 }

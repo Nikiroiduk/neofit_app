@@ -21,7 +21,7 @@ class SignInScreen extends StatelessWidget {
       body: SafeArea(
           minimum: const EdgeInsets.all(8),
           child: Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.fromLTRB(15.0, 30.0, 15.0, 30.0),
             child: Column(
               children: [
                 const Spacer(),
@@ -101,7 +101,7 @@ class SignInFormState extends State<SignInForm> {
               ?.message(AppLocalizations.of(context)),
           decoration: InputDecoration(
               label: Text(AppLocalizations.of(context).email),
-              hintText: 'some@mail.com',
+              hintText: AppLocalizations.of(context).mailHint,
               border: const OutlineInputBorder()),
         ),
         SizedBox(
@@ -116,6 +116,7 @@ class SignInFormState extends State<SignInForm> {
               ?.message(AppLocalizations.of(context)),
           obscureText: _isHidden,
           decoration: InputDecoration(
+              counterText: '',
               label: Text(AppLocalizations.of(context).password),
               border: const OutlineInputBorder(),
               suffixIcon: IconButton(

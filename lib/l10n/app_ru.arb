@@ -19,6 +19,7 @@
     "invalidEmail": "Неверный адрес электронной почты",
     "passwordCantBeEmpty": "Пароль не может быть пустым",
     "passwordIsTooShort": "Пароль слишком короткий",
-    "invalidPassword": "Пароль должен содержать как минимум 1 символ и 1 цифру"
+    "invalidPassword": "Пароль должен содержать как минимум 1 символ и 1 цифру",
+    "mailHint": "some@mail.com"
 
 }

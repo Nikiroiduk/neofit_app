@@ -39,7 +39,6 @@ class UsernameFormz extends FormzInput<String, UsernameValidationError> {
     if (!UsernameRegexValidator().isValid(value)) {
       return UsernameValidationError.invalid;
     }
-
     return null;
   }
 }
