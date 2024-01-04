@@ -108,6 +108,7 @@ class SignInFormState extends State<SignInForm> {
           height: screenHeight * .02,
         ),
         TextFormField(
+          maxLength: 30,
           controller: _passwordController,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) => _state.password

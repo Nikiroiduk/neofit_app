@@ -120,6 +120,7 @@ class SignUpFormState extends State<SignUpForm> {
           height: screenHeight * .02,
         ),
         TextFormField(
+          maxLength: 30,
           controller: _usernameController,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) => _state.username
@@ -133,6 +134,7 @@ class SignUpFormState extends State<SignUpForm> {
           height: screenHeight * .02,
         ),
         TextFormField(
+          maxLength: 30,
           controller: _passwordController,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) => _state.password

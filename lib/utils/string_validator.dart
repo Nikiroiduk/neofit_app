@@ -36,12 +36,12 @@ class PasswordRegexValidator extends RegexValidator {
   PasswordRegexValidator()
       : super(
             regexSource:
-                r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*();:,."-_/#?&])[A-Za-z\d@$!%*();:,."-_/#?&]{8,}$');
+                r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*();:,."-_/#?&])[A-Za-z\d@$!%*();:,."-_/#?&]{8,29}$');
 }
 
 class UsernameRegexValidator extends RegexValidator {
   UsernameRegexValidator()
-      : super(regexSource: r'^[a-zA-Z_][a-zA-Z0-9_]{3,19}$');
+      : super(regexSource: r'^[a-zA-Z_][a-zA-Z0-9_]{3,29}$');
 }
 
 class NonEmptyStringValidator extends StringValidator {
