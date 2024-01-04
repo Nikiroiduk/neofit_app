@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:neofit_app/auth/auth.dart';
+import 'package:neofit_app/domain/auth/auth.dart';
 
 class AuthRepository {
   final AuthService _authService;

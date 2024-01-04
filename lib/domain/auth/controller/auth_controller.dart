@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:neofit_app/auth/auth.dart';
+import 'package:neofit_app/domain/auth/auth.dart';
 
 class AuthState extends Equatable {
   const AuthState();

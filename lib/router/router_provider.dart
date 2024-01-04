@@ -3,11 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/router/router_notifier.dart';
 import 'package:neofit_app/router/utils.dart';
-import 'package:neofit_app/view/auth/password_restoration_page.dart';
-import 'package:neofit_app/view/onboarding/onboarding.dart';
-import 'package:neofit_app/view/personal_information.dart';
+import 'package:neofit_app/presentation/auth/password_restoration_page.dart';
+import 'package:neofit_app/presentation/onboarding/onboarding.dart';
+import 'package:neofit_app/presentation/personal_information.dart';
 // import 'package:neofit_app/view/router_transition_factory.dart';
-import '../view/view.dart';
+import '../presentation/presentation.dart';
 
 final rootNavKey = GlobalKey<NavigatorState>();
 final dashboardNavKey = GlobalKey<NavigatorState>();

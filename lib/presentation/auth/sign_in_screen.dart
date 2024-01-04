@@ -5,14 +5,13 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/router/router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:neofit_app/view/auth/auth_images.dart';
-import 'package:neofit_app/view/auth/domain/email_formz.dart';
-import 'package:neofit_app/view/auth/domain/password_formz.dart';
-import 'package:neofit_app/view/auth/domain/username_formz.dart';
-import '../../auth/auth.dart';
+import 'package:neofit_app/presentation/auth/auth_images.dart';
+import 'package:neofit_app/presentation/auth/formz/email_formz.dart';
+import 'package:neofit_app/presentation/auth/formz/password_formz.dart';
+import '../../domain/auth/auth.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+class SignInScreen extends StatelessWidget {
+  const SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class SignUpScreen extends StatelessWidget {
                   AuthImages.signInUp(currentScheme),
                 ),
                 const Spacer(),
-                const SignUpForm(),
+                const SignInForm(),
               ],
             ),
           )),
@@ -38,31 +37,23 @@ class SignUpScreen extends StatelessWidget {
   }
 }
 
-class SignUpForm extends StatefulWidget {
-  const SignUpForm({super.key});
+class SignInForm extends StatefulWidget {
+  const SignInForm({super.key});
 
   @override
-  SignUpFormState createState() => SignUpFormState();
+  SignInFormState createState() => SignInFormState();
 }
 
-class SignUpFormState extends State<SignUpForm> {
+class SignInFormState extends State<SignInForm> {
   final _key = GlobalKey<FormState>();
-  late SignUpState _state;
+  late SignInState _state;
   late final TextEditingController _emailController;
-  late final TextEditingController _usernameController;
   late final TextEditingController _passwordController;
   bool _isHidden = true;
 
   void _onEmailChanged() {
     setState(() {
       _state = _state.copyWith(email: EmailFormz.dirty(_emailController.text));
-    });
-  }
-
-  void _onUsernameChanged() {
-    setState(() {
-      _state = _state.copyWith(
-          username: UsernameFormz.dirty(_usernameController.text));
     });
   }
 
@@ -82,11 +73,9 @@ class SignUpFormState extends State<SignUpForm> {
   @override
   void initState() {
     super.initState();
-    _state = SignUpState();
+    _state = SignInState();
     _emailController = TextEditingController(text: _state.email.value)
       ..addListener(_onEmailChanged);
-    _usernameController = TextEditingController(text: _state.password.value)
-      ..addListener(_onUsernameChanged);
     _passwordController = TextEditingController(text: _state.password.value)
       ..addListener(_onPasswordChanged);
   }
@@ -94,7 +83,6 @@ class SignUpFormState extends State<SignUpForm> {
   @override
   void dispose() {
     _emailController.dispose();
-    _usernameController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -121,20 +109,6 @@ class SignUpFormState extends State<SignUpForm> {
         ),
         TextFormField(
           maxLength: 30,
-          controller: _usernameController,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (value) => _state.username
-              .validator(value ?? '')
-              ?.message(AppLocalizations.of(context)),
-          decoration: InputDecoration(
-              label: Text(AppLocalizations.of(context).username),
-              border: const OutlineInputBorder()),
-        ),
-        SizedBox(
-          height: screenHeight * .02,
-        ),
-        TextFormField(
-          maxLength: 30,
           controller: _passwordController,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) => _state.password
@@ -151,15 +125,27 @@ class SignUpFormState extends State<SignUpForm> {
                       : const Icon(Icons.visibility_rounded))),
         ),
         SizedBox(
-          height: screenHeight * .02,
+          height: screenHeight * .01,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+              onPressed: () => context.go(Screens.passwordRestoration.path),
+              child: Text(AppLocalizations.of(context).forgotPassword),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: screenHeight * .01,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(AppLocalizations.of(context).alreadyHaveAnAccount),
+            Text(AppLocalizations.of(context).dontHaveAnAccountYet),
             TextButton(
-              onPressed: () => context.go(Screens.signIn.path),
-              child: Text(AppLocalizations.of(context).signIn),
+              onPressed: () => context.go(Screens.signUp.path),
+              child: Text(AppLocalizations.of(context).createOne),
             ),
           ],
         ),
@@ -177,15 +163,12 @@ class SignUpFormState extends State<SignUpForm> {
                             ? null
                             : () {
                                 if (!_key.currentState!.validate()) return;
-                                ref
-                                    .read(authControllerProvider.notifier)
-                                    .signUp(
-                                        _emailController.text,
-                                        _usernameController.text,
-                                        _passwordController.text);
+                                ref.read(authControllerProvider.notifier).login(
+                                    _emailController.text,
+                                    _passwordController.text);
                               },
                         icon: const Icon(Icons.login_rounded),
-                        label: Text(AppLocalizations.of(context).signUp),
+                        label: Text(AppLocalizations.of(context).signIn),
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.all(20.0),
                         )),
@@ -197,29 +180,25 @@ class SignUpFormState extends State<SignUpForm> {
   }
 }
 
-class SignUpState with FormzMixin {
-  SignUpState({
+class SignInState with FormzMixin {
+  SignInState({
     this.email = const EmailFormz.pure(),
-    this.username = const UsernameFormz.pure(),
     this.password = const PasswordFormz.pure(),
   });
 
   final EmailFormz email;
-  final UsernameFormz username;
   final PasswordFormz password;
 
-  SignUpState copyWith({
+  SignInState copyWith({
     EmailFormz? email,
-    UsernameFormz? username,
     PasswordFormz? password,
   }) {
-    return SignUpState(
+    return SignInState(
       email: email ?? this.email,
-      username: username ?? this.username,
       password: password ?? this.password,
     );
   }
 
   @override
-  List<FormzInput<dynamic, dynamic>> get inputs => [email, username, password];
+  List<FormzInput<dynamic, dynamic>> get inputs => [email, password];
 }
