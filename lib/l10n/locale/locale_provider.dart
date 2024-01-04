@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:neofit_app/platform_locale/platform_locale_interface.dart';
-import 'package:neofit_app/preferences.dart';
+import 'package:neofit_app/l10n/platform_locale/platform_locale_interface.dart';
+import 'package:neofit_app/preferences/preferences.dart';
 
 final platformLocaleProvider =
     StateProvider<Locale>((ref) => PlatformLocale().getPlatformLocale());
