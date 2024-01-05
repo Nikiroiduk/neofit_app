@@ -41,7 +41,7 @@ class PasswordRegexValidator extends RegexValidator {
 
 class UsernameRegexValidator extends RegexValidator {
   UsernameRegexValidator()
-      : super(regexSource: r'^[a-zA-Z_][a-zA-Z0-9_]{,29}$');
+      : super(regexSource: r'^[a-zA-Z_][a-zA-Z0-9_]{0,29}$');
 }
 
 class NonEmptyStringValidator extends StringValidator {

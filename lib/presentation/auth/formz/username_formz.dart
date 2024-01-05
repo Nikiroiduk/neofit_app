@@ -32,13 +32,14 @@ class UsernameFormz extends FormzInput<String, UsernameValidationError> {
       return UsernameValidationError.empty;
     }
 
+    if (!UsernameRegexValidator().isValid(value)) {
+      return UsernameValidationError.invalid;
+    }
+
     if (!MinLengthStringValidator(4).isValid(value)) {
       return UsernameValidationError.short;
     }
 
-    if (!UsernameRegexValidator().isValid(value)) {
-      return UsernameValidationError.invalid;
-    }
     return null;
   }
 }
