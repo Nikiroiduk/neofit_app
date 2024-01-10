@@ -1,7 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:neofit_app/data/models/models.dart';
 import 'package:neofit_app/domain/auth/auth.dart';
+import 'package:neofit_app/globals/global_provider.dart';
+import 'package:neofit_app/preferences/preferences.dart';
 
 class AuthState extends Equatable {
   const AuthState();
@@ -25,10 +28,12 @@ class AuthStateLoading extends AuthState {
 }
 
 class AuthStateSuccess extends AuthState {
-  const AuthStateSuccess();
+  const AuthStateSuccess(this.user);
+
+  final User user;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [user];
 }
 
 class AuthStateLoggedOut extends AuthState {
@@ -39,10 +44,12 @@ class AuthStateLoggedOut extends AuthState {
 }
 
 class AuthStateSignedUp extends AuthState {
-  const AuthStateSignedUp();
+  const AuthStateSignedUp({required this.user});
+
+  final User user;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [user];
 }
 
 class AuthStateError extends AuthState {
@@ -55,7 +62,12 @@ class AuthStateError extends AuthState {
 }
 
 class AuthController extends StateNotifier<AuthState> {
-  AuthController({required this.ref}) : super(const AuthStateInitial());
+  AuthController({required this.ref}) : super(const AuthStateInitial()) {
+    var pref = ref.watch(preferences);
+    debugPrint('pref token: ${pref.token}');
+    if (pref.token != '') state = AuthStateSuccess(User(token: pref.token));
+  }
+  // AuthController({required this.ref}) : super(const AuthStateInitial());
 
   final Ref ref;
 
@@ -63,8 +75,11 @@ class AuthController extends StateNotifier<AuthState> {
     state = const AuthStateLoading();
     debugPrint('$state with email: $email and password: $password');
     try {
-      await ref.read(authServiceProvider).login(email, password);
-      state = const AuthStateSuccess();
+      var user = await ref.read(authRepositoryProvider).login(email, password);
+      state = AuthStateSuccess(user);
+
+      ref.read(preferences).persistToken(user.token);
+
       debugPrint(state.toString());
     } catch (e) {
       state = AuthStateError(e.toString());
@@ -75,8 +90,12 @@ class AuthController extends StateNotifier<AuthState> {
     state = const AuthStateLoading();
     debugPrint(state.toString());
     try {
-      await ref.read(authServiceProvider).logout();
+      await ref.read(authRepositoryProvider).logout();
+
       state = const AuthStateLoggedOut();
+
+      ref.read(preferences).persistToken('');
+
       debugPrint(state.toString());
     } catch (e) {
       state = AuthStateError(e.toString());
@@ -87,8 +106,13 @@ class AuthController extends StateNotifier<AuthState> {
     state = const AuthStateLoading();
     debugPrint(state.toString());
     try {
-      await ref.read(authServiceProvider).signUp(username, email, password);
-      state = const AuthStateSignedUp();
+      var user = await ref
+          .read(authRepositoryProvider)
+          .signUp(username, email, password);
+      state = AuthStateSignedUp(user: user);
+
+      ref.read(preferences).persistToken(user.token);
+
       debugPrint(state.toString());
     } catch (e) {
       state = AuthStateError(e.toString());

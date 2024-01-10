@@ -6,7 +6,6 @@ class PlatformLocaleWeb implements PlatformLocale {
   @override
   Locale getPlatformLocale() {
     // Web locale is fucked up
-    // TODO: Web locale
 
     // String platformLocaleName = Platform.localeName;
     // debugPrint("Platform Locale Name (Web): $platformLocaleName");

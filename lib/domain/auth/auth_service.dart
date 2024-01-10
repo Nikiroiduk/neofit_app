@@ -1,9 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:neofit_app/data/models/models.dart';
 
 class AuthService {
-  Future<String> login(String email, String password) async {
-    return Future.delayed(const Duration(milliseconds: 2000))
-        .then((value) => 'token');
+  Future<User> login(String email, String password) async {
+    return User(token: "$email $password");
   }
 
   Future<bool> logout() async {
@@ -11,9 +11,8 @@ class AuthService {
         .then((value) => true);
   }
 
-  Future<String> signUp(String username, String email, String password) async {
-    return Future.delayed(const Duration(milliseconds: 2000))
-        .then((value) => 'token');
+  Future<User> signUp(String username, String email, String password) async {
+    return User(token: "$email $password $username");
   }
 }
 

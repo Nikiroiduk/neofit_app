@@ -10,8 +10,13 @@ import 'router/router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+// TODO: Web locale isn't working (getPlatformLocale)
 // TODO: fix onboarding images
 // TODO: animate skip/prev and next/done btns on onboarding page
+// TODO: check internet connection on sign_in/up screen
+// TODO: fix password validation in sign_in screen and handle authorization with incorrect data
+// TODO: save authorized user token with shared preferences
+// TODO: add remote(API) and local(Hive) data source providers
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   @override

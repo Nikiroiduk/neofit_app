@@ -22,6 +22,8 @@ class Preferences {
   persistLocale(Locale locale) =>
       sharedPreferences.setString('locale', locale.languageCode);
 
+  persistToken(String token) => sharedPreferences.setString('token', token);
+
   ThemeMode get themeMode => ThemeMode.values.firstWhere(
         (element) =>
             element.toString() == sharedPreferences.getString('themeMode'),
@@ -35,4 +37,6 @@ class Preferences {
 
   Locale get locale =>
       Locale(sharedPreferences.getString('locale') ?? 'en', '');
+
+  String get token => sharedPreferences.getString('token') ?? '';
 }
