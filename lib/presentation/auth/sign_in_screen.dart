@@ -10,12 +10,6 @@ import 'package:neofit_app/presentation/auth/formz/email_formz.dart';
 import 'package:neofit_app/presentation/auth/formz/password_formz.dart';
 import '../../domain/auth/auth.dart';
 
-// import 'package:flutter/services.dart' show rootBundle;
-
-// Future<String> loadAsset() async {
-//   return await rootBundle.loadString('assets/user.json');
-// }
-
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
 

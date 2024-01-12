@@ -1,17 +1,29 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'user.g.dart';
+
+@JsonSerializable()
 class User {
-  const User({required this.token});
-  final String token;
+  User({this.token = '', this.email = '', this.username = ''});
+  String token;
+  String email;
+  String username;
 
   static User get empty {
-    return const User(token: 'none');
+    return User(token: '');
   }
 
   bool get isEmpty {
-    return token == 'none';
+    return token == '';
   }
 
   @override
   String toString() {
-    return "User token: $token";
+    return 'Token: $token\nEmail: $email\nUsername: $username\n';
   }
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  /// Connect the generated [_$UserToJson] function to the `toJson` method.
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }

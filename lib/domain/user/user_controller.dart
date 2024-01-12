@@ -47,12 +47,12 @@ class UserNotifier extends StateNotifier<UserState> {
     }
 
     if (network == ConnectivityStatus.connected) {
-      return const User(token: 'user from API');
+      return User(token: 'user from API');
       // TODO: return user with given token from API
     }
 
     if (network == ConnectivityStatus.disconnected) {
-      return const User(token: 'user from Hive');
+      return User(token: 'user from Hive');
       // TODO: return user with given token from Hive
     }
 
