@@ -81,6 +81,7 @@ class AuthController extends StateNotifier<AuthState> {
 
       debugPrint(state.toString());
     } catch (e) {
+      debugPrint(e.toString());
       state = AuthStateError(e.toString());
     }
   }

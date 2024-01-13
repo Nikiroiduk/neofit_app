@@ -1,5 +1,5 @@
 import 'package:formz/formz.dart';
-import 'package:neofit_app/utils/string_validator.dart';
+import 'package:neofit_app/presentation/utils/string_validator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum UsernameValidationError {

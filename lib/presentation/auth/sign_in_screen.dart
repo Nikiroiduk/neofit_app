@@ -6,8 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/router/router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:neofit_app/presentation/auth/auth_images.dart';
-import 'package:neofit_app/presentation/auth/formz/email_formz.dart';
-import 'package:neofit_app/presentation/auth/formz/password_formz.dart';
+import 'package:neofit_app/presentation/utils/formz/email_formz.dart';
+import 'package:neofit_app/presentation/utils/formz/password_formz.dart';
 import '../../domain/auth/auth.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -93,6 +93,23 @@ class SignInFormState extends State<SignInForm> {
     return Form(
       key: _key,
       child: Column(children: [
+        Consumer(
+          builder: (context, ref, child) {
+            if (ref.watch(authControllerProvider) is AuthStateError) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  AppLocalizations.of(context).userDataIsIncorrect,
+                  style: TextStyle(
+                      foreground: Paint()
+                        ..color = Theme.of(context).colorScheme.error),
+                ),
+              );
+            } else {
+              return const Text('');
+            }
+          },
+        ),
         TextFormField(
           controller: _emailController,
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -116,14 +133,16 @@ class SignInFormState extends State<SignInForm> {
               ?.message(AppLocalizations.of(context)),
           obscureText: _isHidden,
           decoration: InputDecoration(
-              counterText: '',
-              label: Text(AppLocalizations.of(context).password),
-              border: const OutlineInputBorder(),
-              suffixIcon: IconButton(
-                  onPressed: _toggleVisibility,
-                  icon: _isHidden
-                      ? const Icon(Icons.visibility_off_rounded)
-                      : const Icon(Icons.visibility_rounded))),
+            counterText: '',
+            label: Text(AppLocalizations.of(context).password),
+            border: const OutlineInputBorder(),
+            suffixIcon: IconButton(
+              onPressed: _toggleVisibility,
+              icon: _isHidden
+                  ? const Icon(Icons.visibility_off_rounded)
+                  : const Icon(Icons.visibility_rounded),
+            ),
+          ),
         ),
         SizedBox(
           height: screenHeight * .01,
@@ -154,11 +173,13 @@ class SignInFormState extends State<SignInForm> {
           height: screenHeight * .01,
         ),
         Consumer(builder: (BuildContext context, WidgetRef ref, Widget? child) {
-          return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            ref.watch(authControllerProvider) is AuthStateLoading
-                ? const CircularProgressIndicator()
-                : Expanded(
-                    child: FilledButton.icon(
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ref.watch(authControllerProvider) is AuthStateLoading
+                  ? const CircularProgressIndicator()
+                  : Expanded(
+                      child: FilledButton.icon(
                         onPressed: ref.watch(authControllerProvider)
                                 is AuthStateLoading
                             ? null
@@ -172,9 +193,11 @@ class SignInFormState extends State<SignInForm> {
                         label: Text(AppLocalizations.of(context).signIn),
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.all(20.0),
-                        )),
-                  ),
-          ]);
+                        ),
+                      ),
+                    ),
+            ],
+          );
         })
       ]),
     );

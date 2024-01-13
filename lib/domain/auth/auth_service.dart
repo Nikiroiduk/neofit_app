@@ -11,6 +11,10 @@ class AuthService implements AuthRepository {
     var token = await ref
         .read(apiControllerProvider.notifier)
         .authUser(email, password);
+
+    if (ref.read(apiControllerProvider) is ApiStateError) {
+      throw Exception(['User data is incorrect']);
+    }
     return token;
   }
 
@@ -25,6 +29,10 @@ class AuthService implements AuthRepository {
     var token = await ref
         .read(apiControllerProvider.notifier)
         .registerUser(email, username, password);
+
+    if (ref.read(apiControllerProvider) is ApiStateError) {
+      throw Exception(['User with this email or password already exists']);
+    }
     return token;
   }
 }

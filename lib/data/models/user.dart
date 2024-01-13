@@ -10,7 +10,7 @@ class User {
   String username;
 
   static User get empty {
-    return User(token: '');
+    return User();
   }
 
   bool get isEmpty {

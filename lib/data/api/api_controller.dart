@@ -46,15 +46,29 @@ class ApiController extends StateNotifier<ApiState> {
 
   Future<String> authUser(String email, String password) async {
     state = const ApiStateLoading();
-    var token = await ref.read(apiRepositoryProvider).authUser(email, password);
-    return token;
+    try {
+      var token =
+          await ref.read(apiRepositoryProvider).authUser(email, password);
+
+      return token;
+    } catch (e) {
+      state = ApiStateError(e.toString());
+    }
+    return '';
   }
 
   Future<String> registerUser(
       String email, String username, String password) async {
-    return ref
-        .read(apiRepositoryProvider)
-        .registerUser(email, username, password);
+    state = const ApiStateLoading();
+    try {
+      var token = await ref
+          .read(apiRepositoryProvider)
+          .registerUser(email, username, password);
+      return token;
+    } catch (e) {
+      state = ApiStateError(e.toString());
+    }
+    return '';
   }
 }
 

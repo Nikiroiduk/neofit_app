@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:neofit_app/config.dart';
+import 'package:neofit_app/utils/config.dart';
 import 'package:neofit_app/data/api/api_repository.dart';
 import 'package:neofit_app/data/models/models.dart';
 
@@ -10,6 +10,7 @@ class ApiService extends ApiRepository {
     var response = await dioClient.post('$apiHost/user/auth',
         data: UserDTO(email: email, password: password).toJson());
     debugPrint('response($response)');
+    if ((response.statusCode ?? 0) >= 400) throw Exception();
     return response.toString();
   }
 
@@ -21,6 +22,7 @@ class ApiService extends ApiRepository {
         data: UserDTO(email: email, username: username, password: password)
             .toJson());
     debugPrint('response($response)');
+    if ((response.statusCode ?? 0) >= 400) throw Exception();
     return response.toString();
   }
 }
