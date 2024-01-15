@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:neofit_app/domain/connectivity_status_provider.dart';
 import 'package:neofit_app/globals/global_provider.dart';
 import 'package:neofit_app/l10n/locale/locale_provider.dart';
 import 'package:neofit_app/presentation/themes/themes.dart';
@@ -43,37 +44,39 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-        return Consumer(
-            builder: (widget, ref, child) => MaterialApp.router(
-                  localizationsDelegates: const [
-                    AppLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                  ],
-                  supportedLocales: ref.watch(supportedLocalesProvider),
-                  locale: ref.watch(localeProvider),
-                  routerConfig: ref.watch(goRouterProvider),
-                  debugShowCheckedModeBanner: false,
-                  theme: ThemeData(
-                    useMaterial3: true,
-                    colorScheme: ref.watch(selectedColorNotifier) ==
-                            ColorSchemeEnum.system
-                        ? lightDynamic
-                        : ref.watch(selectedColorNotifier).colorScheme,
-                    brightness: Brightness.light,
-                  ),
-                  darkTheme: ThemeData(
-                    useMaterial3: true,
-                    colorScheme: ref.watch(selectedColorNotifier) ==
-                            ColorSchemeEnum.system
-                        ? darkDynamic
-                        : ref.watch(selectedColorNotifier).colorSchemeDark,
-                    brightness: Brightness.dark,
-                  ),
-                  themeMode: ref.watch(themeMode),
-                  scrollBehavior: MyCustomScrollBehavior(),
-                ));
+        return Consumer(builder: (widget, ref, child) {
+          ref.read(connectivityStatusProvider);
+          return MaterialApp.router(
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: ref.watch(supportedLocalesProvider),
+            locale: ref.watch(localeProvider),
+            routerConfig: ref.watch(goRouterProvider),
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              useMaterial3: true,
+              colorScheme:
+                  ref.watch(selectedColorNotifier) == ColorSchemeEnum.system
+                      ? lightDynamic
+                      : ref.watch(selectedColorNotifier).colorScheme,
+              brightness: Brightness.light,
+            ),
+            darkTheme: ThemeData(
+              useMaterial3: true,
+              colorScheme:
+                  ref.watch(selectedColorNotifier) == ColorSchemeEnum.system
+                      ? darkDynamic
+                      : ref.watch(selectedColorNotifier).colorSchemeDark,
+              brightness: Brightness.dark,
+            ),
+            themeMode: ref.watch(themeMode),
+            scrollBehavior: MyCustomScrollBehavior(),
+          );
+        });
       },
     );
   }

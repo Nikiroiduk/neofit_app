@@ -18,7 +18,7 @@ final supportedLocalesProvider = Provider<List<Locale>>((ref) {
 final localeProvider = Provider<Locale>((ref) => ref.watch(localeNotifier));
 
 final localeNotifier = StateNotifierProvider<LocaleNotifier, Locale>(
-    (ref) => LocaleNotifier(preferences: ref.watch(preferences)));
+    (ref) => LocaleNotifier(preferences: ref.watch(preferencesProvider)));
 
 class LocaleNotifier extends StateNotifier<Locale> {
   final Preferences preferences;

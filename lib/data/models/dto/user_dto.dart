@@ -5,7 +5,7 @@ part 'user_dto.g.dart';
 
 @JsonSerializable()
 class UserDTO extends User {
-  UserDTO({required String email, String username = '', required this.password})
+  UserDTO({String email = '', String username = '', this.password = ''})
       : super(email: email, username: username);
   String password;
 

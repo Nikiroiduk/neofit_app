@@ -63,7 +63,7 @@ class AuthStateError extends AuthState {
 
 class AuthController extends StateNotifier<AuthState> {
   AuthController({required this.ref}) : super(const AuthStateInitial()) {
-    var pref = ref.watch(preferences);
+    var pref = ref.watch(preferencesProvider);
     debugPrint('pref token: ${pref.token}');
     if (pref.token != '') state = AuthStateSuccess(pref.token);
   }
@@ -77,7 +77,7 @@ class AuthController extends StateNotifier<AuthState> {
       var token = await ref.read(authRepositoryProvider).login(email, password);
       state = AuthStateSuccess(token);
 
-      ref.read(preferences).persistToken(token);
+      ref.read(preferencesProvider).persistToken(token);
 
       debugPrint(state.toString());
     } catch (e) {
@@ -91,10 +91,15 @@ class AuthController extends StateNotifier<AuthState> {
     debugPrint(state.toString());
     try {
       await ref.read(authRepositoryProvider).logout();
+
+      // TODO: this thing looks wrong...
       ref.read(dashboardNotifierProvider.notifier).setValue(Screens.feed);
       state = const AuthStateLoggedOut();
 
-      ref.read(preferences).persistToken('');
+      ref.read(preferencesProvider).persistToken('');
+
+      // TODO: i don't like it
+      // ref.read(preferencesProvider).persistuserIsConfigured(false);
 
       debugPrint(state.toString());
     } catch (e) {
@@ -111,7 +116,7 @@ class AuthController extends StateNotifier<AuthState> {
           .signUp(email, tokenname, password);
       state = AuthStateSignedUp(token: token);
 
-      ref.read(preferences).persistToken(token);
+      ref.read(preferencesProvider).persistToken(token);
 
       debugPrint(state.toString());
     } catch (e) {

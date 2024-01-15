@@ -56,6 +56,4 @@ class ConnectivityStatusNotifier extends StateNotifier<ConnectivityStatus> {
 
 final connectivityStatusProvider =
     StateNotifierProvider<ConnectivityStatusNotifier, ConnectivityStatus>(
-        (ref) {
-  return ConnectivityStatusNotifier();
-});
+        (ref) => ConnectivityStatusNotifier());

@@ -136,11 +136,14 @@ class SignInFormState extends State<SignInForm> {
             counterText: '',
             label: Text(AppLocalizations.of(context).password),
             border: const OutlineInputBorder(),
-            suffixIcon: IconButton(
-              onPressed: _toggleVisibility,
-              icon: _isHidden
-                  ? const Icon(Icons.visibility_off_rounded)
-                  : const Icon(Icons.visibility_rounded),
+            suffixIcon: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: IconButton(
+                onPressed: _toggleVisibility,
+                icon: _isHidden
+                    ? const Icon(Icons.visibility_off_rounded)
+                    : const Icon(Icons.visibility_rounded),
+              ),
             ),
           ),
         ),

@@ -9,13 +9,14 @@ class FeedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text('Feed'),
-              Text(ref.watch(userProvider.notifier).getUser().toString()),
-            ]);
+        return FutureBuilder(
+          future: ref.read(userProvider.notifier).getUser(),
+          builder: (context, snapshot) {
+            return snapshot.hasData
+                ? Text(snapshot.data!.toJson().toString())
+                : const Text('Meh');
+          },
+        );
       },
     );
   }
