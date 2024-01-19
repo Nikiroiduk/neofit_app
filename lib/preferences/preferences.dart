@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../presentation/themes/themes.dart';
 
-final preferences = Provider(
+final preferencesProvider = Provider(
     (ref) => Preferences(sharedPreferences: ref.watch(sharedPreferences)));
 
 class Preferences {
@@ -22,6 +22,11 @@ class Preferences {
   persistLocale(Locale locale) =>
       sharedPreferences.setString('locale', locale.languageCode);
 
+  persistToken(String token) => sharedPreferences.setString('token', token);
+
+  persistuserIsConfigured(bool isConfigured) =>
+      sharedPreferences.setBool('userIsConfigured', isConfigured);
+
   ThemeMode get themeMode => ThemeMode.values.firstWhere(
         (element) =>
             element.toString() == sharedPreferences.getString('themeMode'),
@@ -35,4 +40,9 @@ class Preferences {
 
   Locale get locale =>
       Locale(sharedPreferences.getString('locale') ?? 'en', '');
+
+  String get token => sharedPreferences.getString('token') ?? '';
+
+  bool get userIsConfigured =>
+      sharedPreferences.getBool('userIsConfigured') ?? false;
 }

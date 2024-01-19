@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/domain/auth/auth.dart';
+import 'package:neofit_app/domain/user/user_controller.dart';
 import 'package:neofit_app/router/router.dart';
 
 class RouterNotifier extends ChangeNotifier {
@@ -12,10 +13,12 @@ class RouterNotifier extends ChangeNotifier {
   RouterNotifier(this._ref) {
     _ref.listen<AuthState>(
         authControllerProvider, (_, __) => notifyListeners());
+    _ref.listen<UserState>(userProvider, (_, __) => notifyListeners());
   }
 
   FutureOr<String?> routeRedirect(GoRouterState state) async {
     final authState = _ref.read(authControllerProvider);
+    final userState = _ref.read(userProvider);
 
     if (authState is AuthStateSuccess &&
         state.matchedLocation == Screens.signIn.path) {
@@ -30,6 +33,11 @@ class RouterNotifier extends ChangeNotifier {
     if (authState is AuthStateLoggedOut &&
         state.matchedLocation == Screens.profile.path) {
       return Screens.signIn.path;
+    }
+
+    if (userState is UserStateIsConfigured &&
+        state.matchedLocation == Screens.personalInformation.path) {
+      return Screens.feed.path;
     }
 
     return null;

@@ -44,6 +44,18 @@ class UsernameRegexValidator extends RegexValidator {
       : super(regexSource: r'^[a-zA-Z_][a-zA-Z0-9_]{0,29}$');
 }
 
+class DateRegexValidator extends RegexValidator {
+  DateRegexValidator() : super(regexSource: r'[0-9]{2}\D[0-9]{2}\D[0-9]{4}');
+}
+
+class HeightRegexValidator extends RegexValidator {
+  HeightRegexValidator() : super(regexSource: r"[0-9]{2,3}|[0-9]['][0-9]{1,2}");
+}
+
+class WeightRegexValidator extends RegexValidator {
+  WeightRegexValidator() : super(regexSource: r'[0-9]{2,3}');
+}
+
 class NonEmptyStringValidator extends StringValidator {
   @override
   bool isValid(String? value) {

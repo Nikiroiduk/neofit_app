@@ -6,9 +6,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/router/router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:neofit_app/presentation/auth/auth_images.dart';
-import 'package:neofit_app/presentation/auth/formz/email_formz.dart';
-import 'package:neofit_app/presentation/auth/formz/password_formz.dart';
-import 'package:neofit_app/presentation/auth/formz/username_formz.dart';
+import 'package:neofit_app/presentation/utils/formz/email_formz.dart';
+import 'package:neofit_app/presentation/utils/formz/password_formz.dart';
+import 'package:neofit_app/presentation/utils/formz/username_formz.dart';
 import '../../domain/auth/auth.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -105,6 +105,23 @@ class SignUpFormState extends State<SignUpForm> {
     return Form(
       key: _key,
       child: Column(children: [
+        Consumer(
+          builder: (context, ref, child) {
+            if (ref.watch(authControllerProvider) is AuthStateError) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  AppLocalizations.of(context).userAlreadyExist,
+                  style: TextStyle(
+                      foreground: Paint()
+                        ..color = Theme.of(context).colorScheme.error),
+                ),
+              );
+            } else {
+              return const Text('');
+            }
+          },
+        ),
         TextFormField(
           controller: _emailController,
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -146,11 +163,14 @@ class SignUpFormState extends State<SignUpForm> {
               counterText: '',
               label: Text(AppLocalizations.of(context).password),
               border: const OutlineInputBorder(),
-              suffixIcon: IconButton(
-                  onPressed: _toggleVisibility,
-                  icon: _isHidden
-                      ? const Icon(Icons.visibility_off_rounded)
-                      : const Icon(Icons.visibility_rounded))),
+              suffixIcon: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: IconButton(
+                    onPressed: _toggleVisibility,
+                    icon: _isHidden
+                        ? const Icon(Icons.visibility_off_rounded)
+                        : const Icon(Icons.visibility_rounded)),
+              )),
         ),
         SizedBox(
           height: screenHeight * .02,

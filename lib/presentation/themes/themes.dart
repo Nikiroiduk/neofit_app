@@ -5,7 +5,7 @@ import 'package:neofit_app/presentation/themes/royal_purple.dart';
 import 'package:neofit_app/presentation/themes/venetian_red.dart';
 
 final themeMode = StateNotifierProvider<ThemeModeNotifier, ThemeMode>(
-  (ref) => ThemeModeNotifier(preferences: ref.watch(preferences)),
+  (ref) => ThemeModeNotifier(preferences: ref.watch(preferencesProvider)),
 );
 
 enum ColorSchemeEnum { royalPurple, venetianRed, system }
@@ -48,8 +48,8 @@ class ThemeModeNotifier extends StateNotifier<ThemeMode> {
 final selectedColorScheme =
     StateProvider<ColorSchemeEnum>((ref) => ColorSchemeEnum.royalPurple);
 final selectedColorNotifier =
-    StateNotifierProvider<SelectedColorNotifier, ColorSchemeEnum>(
-        (ref) => SelectedColorNotifier(preferences: ref.watch(preferences)));
+    StateNotifierProvider<SelectedColorNotifier, ColorSchemeEnum>((ref) =>
+        SelectedColorNotifier(preferences: ref.watch(preferencesProvider)));
 
 class SelectedColorNotifier extends StateNotifier<ColorSchemeEnum> {
   final Preferences preferences;
