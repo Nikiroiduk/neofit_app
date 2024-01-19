@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:neofit_app/domain/auth/auth_controller.dart';
 import 'package:neofit_app/router/utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../dashboard_screen/dashboard.dart';
@@ -12,16 +13,25 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Consumer(
-          builder: (context, ref, child) {
-            return IconButton(
-              icon: const Icon(Icons.close_rounded),
-              onPressed: () =>
-                  context.go(ref.watch(dashboardNotifierProvider).path),
-            );
-          },
+        leading: IconButton(
+          icon: const Icon(Icons.close_rounded),
+          onPressed: () => context.go(Screens.profile.path),
         ),
         title: const Text('Settings'),
+        actions: [
+          Consumer(
+            builder: (BuildContext context, WidgetRef ref, Widget? child) {
+              var isBtnActive =
+                  ref.watch(authControllerProvider) is! AuthStateLoading;
+              return IconButton(
+                onPressed: isBtnActive
+                    ? () => ref.read(authControllerProvider.notifier).logout()
+                    : null,
+                icon: const Icon(Icons.logout_rounded),
+              );
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -31,7 +31,7 @@ class RouterNotifier extends ChangeNotifier {
     }
 
     if (authState is AuthStateLoggedOut &&
-        state.matchedLocation == Screens.profile.path) {
+        state.matchedLocation == Screens.settings.path) {
       return Screens.signIn.path;
     }
 
