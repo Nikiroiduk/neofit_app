@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:neofit_app/data/api/api.dart';
+import 'package:neofit_app/data/local_storage/hive_controller.dart';
 import 'package:neofit_app/data/models/models.dart';
 import 'package:neofit_app/domain/auth/auth.dart';
 import 'package:neofit_app/domain/connectivity_status_provider.dart';
@@ -56,25 +57,30 @@ class UserNotifier extends StateNotifier<UserState> {
 
   final Ref ref;
 
-  Future<User> getUser() async {
+  Future<User?> getUser() async {
     var authState = ref.watch(authControllerProvider);
     var network = ref.watch(connectivityStatusProvider);
     var apiController = ref.watch(apiControllerProvider.notifier);
     var token = ref.watch(preferencesProvider).token;
+    var hiveController = ref.watch(hiveControllerProvider(token)).value;
 
     if (authState is! AuthStateSuccess && authState is! AuthStateSignedUp) {
       return User.empty;
     }
+
     debugPrint(network.toString());
     if (network == ConnectivityStatus.connected) {
       var user = await apiController.getUser(token);
       debugPrint(user?.toJson().toString());
-      return user ?? User.empty;
+      if (user == null) {
+        return User.empty;
+      }
+      hiveController?.storeUser(user);
+      return user;
     }
 
     if (network == ConnectivityStatus.disconnected) {
-      return User();
-      // TODO: return user with given token from Hive
+      return hiveController?.getUser();
     }
 
     return User.empty;
@@ -84,11 +90,12 @@ class UserNotifier extends StateNotifier<UserState> {
     var apiController = ref.watch(apiControllerProvider.notifier);
     var network = ref.watch(connectivityStatusProvider);
     var token = ref.watch(preferencesProvider).token;
+    var hiveController = ref.watch(hiveControllerProvider(token)).value;
 
     state = const UserStateLoading();
     debugPrint(state.toString());
 
-    // TODO: save user in localStorage
+    hiveController?.storeUser(user);
 
     if (network == ConnectivityStatus.connected) {
       debugPrint('Token: $token\nUser: ${user.toJson()}');

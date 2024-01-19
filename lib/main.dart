@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:neofit_app/domain/connectivity_status_provider.dart';
 import 'package:neofit_app/globals/global_provider.dart';
 import 'package:neofit_app/l10n/locale/locale_provider.dart';
 import 'package:neofit_app/presentation/themes/themes.dart';
@@ -45,7 +44,6 @@ class MainApp extends StatelessWidget {
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         return Consumer(builder: (widget, ref, child) {
-          ref.read(connectivityStatusProvider);
           return MaterialApp.router(
             localizationsDelegates: const [
               AppLocalizations.delegate,
