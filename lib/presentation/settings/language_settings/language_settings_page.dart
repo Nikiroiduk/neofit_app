@@ -37,8 +37,14 @@ class LanguageSettingsPage extends StatelessWidget {
                   return ListTile(
                     leading: Container(
                       clipBehavior: Clip.hardEdge,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(6.0))),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(6.0)),
+                          border: Border.all(
+                              strokeAlign: BorderSide.strokeAlignOutside,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .outlineVariant)),
                       child: SvgPicture.string(
                         Locales.values[index].img,
                         width: 32,

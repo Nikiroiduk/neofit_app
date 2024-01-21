@@ -11,7 +11,7 @@ class ThemeSettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Theme'),
+        title: Text(AppLocalizations.of(context).personalization),
       ),
       body: Consumer(
         builder: (context, ref, child) {
@@ -23,14 +23,14 @@ class ThemeSettingsPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 16.0, horizontal: 4.0),
                   child: Text(
-                    AppLocalizations.of(context).style,
+                    AppLocalizations.of(context).theme,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: Theme.of(context).colorScheme.primary),
                   ),
                 ),
                 Row(children: [
                   Expanded(
-                      flex: 8,
+                      flex: 11,
                       child: Stack(alignment: Alignment.bottomRight, children: [
                         FilledButton(
                             style: ButtonStyle(
@@ -86,7 +86,7 @@ class ThemeSettingsPage extends StatelessWidget {
                     flex: 1,
                   ),
                   Expanded(
-                      flex: 8,
+                      flex: 11,
                       child: Stack(alignment: Alignment.bottomRight, children: [
                         FilledButton(
                             style: ButtonStyle(
@@ -142,7 +142,7 @@ class ThemeSettingsPage extends StatelessWidget {
                     flex: 1,
                   ),
                   Expanded(
-                      flex: 8,
+                      flex: 11,
                       child: Stack(alignment: Alignment.bottomRight, children: [
                         FilledButton(
                             style: ButtonStyle(

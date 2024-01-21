@@ -8,20 +8,18 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Username'),
-          actions: [
-            IconButton(
-                onPressed: () => context.go(Screens.settings.path),
-                icon: const Icon(Icons.settings_rounded))
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Username'),
+        actions: [
+          IconButton(
+              onPressed: () => context.go(Screens.settings.path),
+              icon: const Icon(Icons.settings_rounded))
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [],
         ),
       ),
     );

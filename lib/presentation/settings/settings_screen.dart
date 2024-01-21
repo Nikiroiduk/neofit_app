@@ -16,7 +16,7 @@ class SettingsScreen extends StatelessWidget {
           icon: const Icon(Icons.close_rounded),
           onPressed: () => context.go(Screens.profile.path),
         ),
-        title: const Text('Settings'),
+        title: Text(AppLocalizations.of(context).settings),
         actions: [
           Consumer(
             builder: (BuildContext context, WidgetRef ref, Widget? child) {
@@ -75,7 +75,7 @@ class SettingsScreen extends StatelessWidget {
           ),
           Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
             child: Text(
               AppLocalizations.of(context).preferences,
               style: Theme.of(context)
@@ -104,7 +104,7 @@ class SettingsScreen extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.brush_rounded),
-            title: Text(AppLocalizations.of(context).theme),
+            title: Text(AppLocalizations.of(context).personalization),
             subtitle: Text(AppLocalizations.of(context).themeDescription),
             onTap: () => context.push(Screens.themeSettings.path),
           ),

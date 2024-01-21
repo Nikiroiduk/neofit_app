@@ -64,7 +64,12 @@
     "russian": "Russian",
     "style": "Style",
     "colorScheme": "Color scheme",
+    "personalization": "Personalization",
     "light": "Light",
     "dark": "Dark",
-    "system": "System"
+    "system": "System",
+    "settings": "Settings",
+    "feed": "Feed",
+    "workout": "Workout"
+
 }
