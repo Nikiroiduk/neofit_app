@@ -4,6 +4,9 @@ import 'package:neofit_app/preferences/preferences.dart';
 import 'package:neofit_app/presentation/themes/royal_purple.dart';
 import 'package:neofit_app/presentation/themes/venetian_red.dart';
 
+late ColorScheme? dynamicLightTheme;
+late ColorScheme? dynamicDarkTheme;
+
 final themeMode = StateNotifierProvider<ThemeModeNotifier, ThemeMode>(
   (ref) => ThemeModeNotifier(preferences: ref.watch(preferencesProvider)),
 );
@@ -18,7 +21,7 @@ extension ColorSchemeEnumX on ColorSchemeEnum {
       case ColorSchemeEnum.venetianRed:
         return VenetianRed.lightColorScheme;
       default:
-        return RoyalPurple.lightColorScheme;
+        return dynamicLightTheme ?? RoyalPurple.lightColorScheme;
     }
   }
 
@@ -29,7 +32,7 @@ extension ColorSchemeEnumX on ColorSchemeEnum {
       case ColorSchemeEnum.venetianRed:
         return VenetianRed.darkColorScheme;
       default:
-        return RoyalPurple.darkColorScheme;
+        return dynamicDarkTheme ?? RoyalPurple.darkColorScheme;
     }
   }
 }
@@ -56,18 +59,9 @@ class SelectedColorNotifier extends StateNotifier<ColorSchemeEnum> {
 
   SelectedColorNotifier({required this.preferences})
       : super(preferences.colorScheme);
-  void red() {
-    state = ColorSchemeEnum.venetianRed;
-    preferences.persistColorScheme(ColorSchemeEnum.venetianRed);
-  }
 
-  void purple() {
-    state = ColorSchemeEnum.royalPurple;
-    preferences.persistColorScheme(ColorSchemeEnum.royalPurple);
-  }
-
-  void system() {
-    state = ColorSchemeEnum.system;
-    preferences.persistColorScheme(ColorSchemeEnum.system);
+  void setTheme(ColorSchemeEnum theme) {
+    state = theme;
+    preferences.persistColorScheme(theme);
   }
 }
