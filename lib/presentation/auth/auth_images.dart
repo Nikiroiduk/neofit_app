@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Converts [Color.value] from DEC to HEX (#RRGGBB)
-extension HexColor on Color {
-  String get hexValue => '#${value.toRadixString(16).substring(2)}';
-}
-
 class AuthImages {
   static String signInUp(ColorScheme scheme) => '''
 <svg width="340" height="235" viewBox="0 0 340 235" fill="none" xmlns="http://www.w3.org/2000/svg">

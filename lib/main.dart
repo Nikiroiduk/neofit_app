@@ -43,6 +43,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+        dynamicLightTheme = lightDynamic;
+        dynamicDarkTheme = darkDynamic;
         return Consumer(builder: (widget, ref, child) {
           return MaterialApp.router(
             localizationsDelegates: const [
